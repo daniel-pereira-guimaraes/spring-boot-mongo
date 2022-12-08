@@ -16,6 +16,7 @@ public class Person implements Serializable {
 	private String id;
 	private String name;
 	private List<String> phones = new ArrayList<>();
+	private PersonAddress Address = new PersonAddress();
 	
 	public Person() {
 		
@@ -43,6 +44,22 @@ public class Person implements Serializable {
 		this.name = name;
 	}
 
+	public List<String> getPhones() {
+		return phones;
+	}
+
+	public void setPhones(List<String> phones) {
+		this.phones = phones;
+	}
+
+	public PersonAddress getAddress() {
+		return Address;
+	}
+
+	public void setAddress(PersonAddress address) {
+		Address = address;
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -63,14 +80,6 @@ public class Person implements Serializable {
 	@Override
 	public String toString() {
 		return "Person [id=" + id + ", name=" + name + "]";
-	}
-
-	public List<String> getPhones() {
-		return phones;
-	}
-
-	public void setPhones(List<String> phones) {
-		this.phones = phones;
 	}
 
 }
