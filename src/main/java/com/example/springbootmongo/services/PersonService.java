@@ -15,6 +15,10 @@ public class PersonService {
 	
 	@Autowired
 	private PersonRepository repository;
+
+	public Person insert(Person person) {
+		return repository.insert(person);
+	}
 	
 	public Person findById(String id) throws Exception {
 		return repository.findById(id).orElseThrow(
