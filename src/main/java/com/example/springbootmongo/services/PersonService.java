@@ -28,6 +28,12 @@ public class PersonService {
 	public Person insert(Person person) {
 		return repository.insert(person);
 	}
+
+	public Person update(Person person) {
+		Person p = findById(person.getId());
+		p.setName(person.getName());
+		return repository.save(p);
+	}
 	
 	public void delete(String id) throws NotFoundException {
 		repository.delete(findById(id));
