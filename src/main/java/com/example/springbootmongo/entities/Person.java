@@ -1,6 +1,8 @@
 package com.example.springbootmongo.entities;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
@@ -13,6 +15,7 @@ public class Person implements Serializable {
 	@Id
 	private String id;
 	private String name;
+	private List<String> phones = new ArrayList<>();
 	
 	public Person() {
 		
@@ -60,6 +63,14 @@ public class Person implements Serializable {
 	@Override
 	public String toString() {
 		return "Person [id=" + id + ", name=" + name + "]";
+	}
+
+	public List<String> getPhones() {
+		return phones;
+	}
+
+	public void setPhones(List<String> phones) {
+		this.phones = phones;
 	}
 
 }
