@@ -1,28 +1,27 @@
 package com.example.springbootmongo.controllers;
 
-public class StandardError {
-	private Long timestamp;
+import java.io.Serializable;
+import java.time.Instant;
+
+public class StandardError implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	private Integer status;
-	private String message;
+	private String error;
 	private String path;
 
 	public StandardError() {
 	}
 
-	public StandardError(Integer status, String message, String path) {
+	public StandardError(Integer status, String error, String path) {
 		super();
-		this.timestamp = System.currentTimeMillis();
 		this.status = status;
-		this.message = message;
+		this.error = error;
 		this.path = path;
 	}
 
-	public Long getTimestamp() {
-		return timestamp;
-	}
-
-	public void setTimestamp(Long timestamp) {
-		this.timestamp = timestamp;
+	public String getTimestamp() {
+		return Instant.now().toString();
 	}
 
 	public Integer getStatus() {
@@ -33,12 +32,12 @@ public class StandardError {
 		this.status = status;
 	}
 
-	public String getMessage() {
-		return message;
+	public String getError() {
+		return error;
 	}
 
-	public void setMessage(String message) {
-		this.message = message;
+	public void setError(String error) {
+		this.error = error;
 	}
 
 	public String getPath() {
