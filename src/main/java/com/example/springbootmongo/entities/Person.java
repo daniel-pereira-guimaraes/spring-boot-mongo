@@ -8,7 +8,11 @@ import java.util.Objects;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 @Document
+@JsonInclude(Include.NON_EMPTY)
 public class Person implements Serializable {
 	private static final long serialVersionUID = 1L;
 
