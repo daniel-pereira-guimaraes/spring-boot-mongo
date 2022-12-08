@@ -16,17 +16,21 @@ public class PersonService {
 	@Autowired
 	private PersonRepository repository;
 
-	public Person insert(Person person) {
-		return repository.insert(person);
-	}
-	
-	public Person findById(String id) throws Exception {
+	public Person findById(String id) throws NotFoundException {
 		return repository.findById(id).orElseThrow(
 			() -> new NotFoundException(Messages.get(Messages.PERSON_NOT_FOUND), id));
 	}
 	
 	public List<Person> findAll() {
 		return repository.findAll();
+	}
+
+	public Person insert(Person person) {
+		return repository.insert(person);
+	}
+	
+	public void delete(String id) throws NotFoundException {
+		repository.delete(findById(id));
 	}
 
 }
