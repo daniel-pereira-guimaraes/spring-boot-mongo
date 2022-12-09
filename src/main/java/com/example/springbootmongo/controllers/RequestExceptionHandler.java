@@ -11,13 +11,22 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @ControllerAdvice
 public class RequestExceptionHandler {
-
+	
+	private ResponseEntity<StandardError> createResponseEntity(
+			HttpStatus status, Throwable e, HttpServletRequest request) {
+		final int statusValue = status.value();
+		final StandardError error = new StandardError(statusValue, e.getMessage(), request.getRequestURI());
+		return ResponseEntity.status(statusValue).body(error);
+	}
+	
 	@ExceptionHandler(NotFoundException.class)
 	public ResponseEntity<StandardError> notFoundException(NotFoundException e, HttpServletRequest request) {
-		final int status = HttpStatus.NOT_FOUND.value();
-		final String message = e.getMessage();
-		final String path = request.getRequestURI();
-		final StandardError error = new StandardError(status, message, path);
-		return ResponseEntity.status(status).body(error);
+		return createResponseEntity(HttpStatus.NOT_FOUND, e, request);
 	}
+	
+	@ExceptionHandler(Throwable.class)
+	public ResponseEntity<StandardError> throwable(Throwable e, HttpServletRequest request) {
+		return createResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR, e, request);
+	}
+	
 }
