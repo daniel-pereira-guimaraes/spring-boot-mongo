@@ -1,6 +1,7 @@
 package com.example.springbootmongo.entities;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -19,6 +20,7 @@ public class Person implements Serializable {
 	@Id
 	private String id;
 	private String name;
+	private LocalDate birthDate;
 	private List<String> phones = new ArrayList<>();
 	private PersonAddress Address = new PersonAddress();
 	
@@ -26,10 +28,18 @@ public class Person implements Serializable {
 		
 	}
 
-	public Person(String id, String name) {
-		super();
+	public Person(String id, String name, LocalDate birthDate) {
 		this.id = id;
 		this.name = name;
+		this.birthDate = birthDate;
+	}
+
+	public Person(String id, String name) {
+		this(id, name, null);
+	}
+	
+	public Person(String name) {
+		this(null, name, null);
 	}
 
 	public String getId() {
@@ -46,6 +56,14 @@ public class Person implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public LocalDate getBirthDate() {
+		return birthDate;
+	}
+	
+	public void setBirthDate(LocalDate birthDate) {
+		this.birthDate = birthDate;
 	}
 
 	public List<String> getPhones() {
