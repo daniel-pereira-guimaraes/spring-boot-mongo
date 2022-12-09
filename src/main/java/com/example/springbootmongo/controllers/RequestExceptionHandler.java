@@ -15,7 +15,10 @@ public class RequestExceptionHandler {
 	private ResponseEntity<StandardError> createResponseEntity(
 			HttpStatus status, Throwable e, HttpServletRequest request) {
 		final int statusValue = status.value();
-		final StandardError error = new StandardError(statusValue, e.getMessage(), request.getRequestURI());
+		final String type = e.getClass().getName();
+		final String message = e.getMessage();
+		final String path = request.getRequestURI();
+		final StandardError error = new StandardError(statusValue, type, message, path);
 		return ResponseEntity.status(statusValue).body(error);
 	}
 	

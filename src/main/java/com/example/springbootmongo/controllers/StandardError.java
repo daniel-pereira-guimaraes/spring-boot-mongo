@@ -7,16 +7,18 @@ public class StandardError implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Integer status;
-	private String error;
+	private String type;
+	private String message;
 	private String path;
 
 	public StandardError() {
 	}
 
-	public StandardError(Integer status, String error, String path) {
+	public StandardError(Integer status, String type, String message, String path) {
 		super();
 		this.status = status;
-		this.error = error;
+		this.type = type;
+		this.message = message;
 		this.path = path;
 	}
 
@@ -31,13 +33,21 @@ public class StandardError implements Serializable {
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
-
-	public String getError() {
-		return error;
+	
+	public String getType() {
+		return type;
+	}
+	
+	public void setType(String type) {
+		this.type = type;
 	}
 
-	public void setError(String error) {
-		this.error = error;
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
 
 	public String getPath() {
