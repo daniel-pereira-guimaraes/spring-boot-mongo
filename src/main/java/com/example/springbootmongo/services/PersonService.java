@@ -1,5 +1,6 @@
 package com.example.springbootmongo.services;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,10 @@ public class PersonService {
 	
 	public List<Person> findByName(String name) {
 		return repository.findByNameContainingIgnoreCase(name);
+	}
+	
+	public List<Person> findByBirthDate(LocalDate minDate, LocalDate maxDate) {
+		return repository.findByBirthDate(minDate, maxDate);
 	}
 	
 	public List<Person> findAll() {

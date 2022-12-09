@@ -3,6 +3,7 @@ package com.example.springbootmongo.controllers;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.net.URLDecoder;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,9 +39,16 @@ public class PersonController {
 		return ResponseEntity.ok(service.findById(id));
 	}
 
-	@GetMapping("/byname")
+	@GetMapping("/byName")
 	public ResponseEntity<List<Person>> findByName(@RequestParam(value = "name") String name) throws UnsupportedEncodingException {
 		return ResponseEntity.ok(service.findByName(URLDecoder.decode(name, "UTF-8")));
+	}
+
+	@GetMapping("/byBirthDate")
+	public ResponseEntity<List<Person>> findByBirthDate(
+			@RequestParam(value = "minDate") LocalDate minDate,
+			@RequestParam(value = "maxDate") LocalDate maxDate) {
+		return ResponseEntity.ok(service.findByBirthDate(minDate, maxDate));
 	}
 	
 	@PostMapping
