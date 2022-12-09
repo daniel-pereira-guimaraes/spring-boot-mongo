@@ -1,6 +1,8 @@
 package com.example.springbootmongo.controllers;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URI;
+import java.net.URLDecoder;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -35,6 +38,11 @@ public class PersonController {
 		return ResponseEntity.ok(service.findById(id));
 	}
 
+	@GetMapping("/byname")
+	public ResponseEntity<List<Person>> findByName(@RequestParam(value = "name") String name) throws UnsupportedEncodingException {
+		return ResponseEntity.ok(service.findByName(URLDecoder.decode(name, "UTF-8")));
+	}
+	
 	@PostMapping
 	public ResponseEntity<Void> insert(@RequestBody Person person) {
 		person = service.insert(person);

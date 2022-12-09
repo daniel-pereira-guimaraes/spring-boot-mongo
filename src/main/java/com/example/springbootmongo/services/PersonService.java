@@ -21,6 +21,10 @@ public class PersonService {
 			() -> new NotFoundException(Messages.get(Messages.PERSON_NOT_FOUND), id));
 	}
 	
+	public List<Person> findByName(String name) {
+		return repository.findByNameContainingIgnoreCase(name);
+	}
+	
 	public List<Person> findAll() {
 		return repository.findAll();
 	}
